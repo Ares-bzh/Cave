@@ -14,9 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         MainWindow.cpp \
-    Rack.cpp
+    Rack.cpp \
+    Bottle.cpp \
+    BottleList.cpp
 
 HEADERS  += MainWindow.h \
-    Rack.h
+    Rack.h \
+    Bottle.h \
+    BottleList.h
 
 FORMS    += MainWindow.ui
