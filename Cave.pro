@@ -16,11 +16,13 @@ SOURCES += main.cpp\
         MainWindow.cpp \
     Rack.cpp \
     Bottle.cpp \
-    BottleList.cpp
+    BottleList.cpp \
+    GraphicsView.cpp
 
 HEADERS  += MainWindow.h \
     Rack.h \
     Bottle.h \
-    BottleList.h
+    BottleList.h \
+    GraphicsView.h
 
 FORMS    += MainWindow.ui

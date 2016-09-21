@@ -49,9 +49,10 @@ Rack Rack::fromDomElement(const QDomElement &rackElement)
   return *this;
 }
 
-void Rack::draw(QGraphicsScene* scene)
+void Rack::draw(QGraphicsScene* scene, BottleList& bottleList)
 {
   int higth, width;
+
 
   higth = ((Straight == _type)?40:30) * _row;
   width = 40 * _col;
@@ -66,12 +67,19 @@ void Rack::draw(QGraphicsScene* scene)
     {
       for(int c=0; c<_col; c++)
       {
+        Bottle* currentBottle = bottleList.fromPos(QPoint(c,r));
+        QBrush brush;
+        if(NULL != currentBottle)
+          brush.setColor(currentBottle->color());
+        else
+          brush.setColor(QColor(255, 255, 255));
+
         scene->addEllipse(25 + c*40,
                           25 + r*40,
                           30,
                           30,
                           QPen(QColor(0, 0, 0)),
-                          QBrush(QColor(255, 255, 255)));
+                          brush);
       }
     }
   }
@@ -81,6 +89,13 @@ void Rack::draw(QGraphicsScene* scene)
     {
       for(int c=0; c<_col-(r%2); c++)
       {
+        Bottle* currentBottle = bottleList.fromPos(QPoint(c,r));
+        QBrush brush(Qt::SolidPattern);
+        if(NULL != currentBottle)
+          brush.setColor(currentBottle->color());
+        else
+          brush.setColor(QColor(255, 255, 255));
+
         if(0 ==r%2)
         {
           scene->addEllipse(25 + c*40,
@@ -88,7 +103,7 @@ void Rack::draw(QGraphicsScene* scene)
                             30,
                             30,
                             QPen(QColor(0, 0, 0)),
-                            QBrush(QColor(255, 255, 255)));
+                            brush);
         }
         else
         {
@@ -97,7 +112,7 @@ void Rack::draw(QGraphicsScene* scene)
                             30,
                             30,
                             QPen(QColor(0, 0, 0)),
-                            QBrush(QColor(255, 255, 255)));
+                            brush);
         }
       }
     }

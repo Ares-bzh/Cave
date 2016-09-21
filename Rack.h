@@ -4,6 +4,7 @@
 #include <QDomElement>
 #include <QDomDocument>
 #include <QGraphicsView>
+#include "BottleList.h"
 
 class Rack
 {
@@ -34,7 +35,7 @@ public:
     QDomElement  toDomElement(QDomDocument& document) const;
     Rack fromDomElement(const QDomElement &elementRequirement);
 
-    void draw(QGraphicsScene* scene);
+    void draw(QGraphicsScene* scene, BottleList &bottleList);
 
 private:
     int _row;

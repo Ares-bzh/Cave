@@ -11,6 +11,8 @@ public:
 
     void toDomElement(QDomDocument& document, QDomElement& parentElement) const;
     BottleList fromDomElement(const QDomElement &elementRequirement);
+
+    Bottle* fromPos(QPoint pos);
 };
 
 #endif

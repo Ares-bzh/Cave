@@ -6,15 +6,18 @@
 #include <QString>
 #include <QDate>
 #include <QPoint>
+#include <QColor>
 
 class Bottle
 {
 public:
-    enum Couleur {DryWhite=0, SweetWhite, Red, Rose, Champagne};
+    enum Couleur {DryWhite=0, SweetWhite, Red, Rose, ColorNb};
+    const QColor cstColorTab[ColorNb]={QColor(244, 242, 155), QColor(252, 210, 44), QColor(160, 20, 20), QColor(255, 160, 160)};
 
     Bottle();
     Bottle(
       const Couleur& couleur,
+      const bool& mousseux,
       const QDate& annee,
       const QDate& dateConso,
       const QDate& dateLimite,
@@ -27,6 +30,7 @@ public:
     Bottle& operator=(const Bottle& a);
 
     inline void setCouleur(const Couleur& couleur){_couleur=couleur;}
+    inline void setMousseux(const bool mousseux){_mousseux=mousseux;}
     inline void setAnnee(const QDate& annee){_annee=annee;}
     inline void setDateConso(const QDate& dateConso){_dateConso=dateConso;}
     inline void setDateLimite(const QDate& dateLimite){_dateLimite=dateLimite;}
@@ -36,6 +40,7 @@ public:
     inline void setEmlpacement(const QPoint& emlpacement){_emlpacement=emlpacement;}
 
     inline const Couleur& couleur()const{return _couleur;}
+    inline const bool& mousseux()const{return _mousseux;}
     inline const QDate& annee()const{return _annee;}
     inline const QDate& dateConso()const{return _dateConso;}
     inline const QDate& dateLimite()const{return _dateLimite;}
@@ -53,11 +58,14 @@ public:
     inline QString& appelation(){return _appelation;}
     inline QPoint& emlpacement(){return _emlpacement;}
 
+    inline QColor color()const{return cstColorTab[_couleur];}
+
     QDomElement  toDomElement(QDomDocument& document) const;
     Bottle fromDomElement(const QDomElement &elementRequirement);
 
 private:
     Couleur _couleur;
+    bool _mousseux;
     QDate _annee;
     QDate _dateConso;
     QDate _dateLimite;

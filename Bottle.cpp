@@ -4,8 +4,10 @@ Bottle::Bottle()
 {
 
 }
+
 Bottle::Bottle(
       const Couleur& couleur,
+      const bool& mousseux,
       const QDate& annee,
       const QDate& dateConso,
       const QDate& dateLimite,
@@ -14,6 +16,7 @@ Bottle::Bottle(
       const QString& appelation,
       const QPoint& emlpacement):
     _couleur(couleur),
+    _mousseux(mousseux),
     _annee(annee),
     _dateConso(dateConso),
     _dateLimite(dateLimite),
@@ -33,6 +36,7 @@ Bottle::Bottle(const Bottle& a)
 Bottle& Bottle::operator=(const Bottle& a)
 {
     _couleur=a.couleur();
+    _mousseux=a.mousseux();
     _annee=a.annee();
     _dateConso=a.dateConso();
     _dateLimite=a.dateLimite();
@@ -61,7 +65,11 @@ QDomElement Bottle::toDomElement(QDomDocument& document) const
 
     bottleElement.setAttribute("appelation", _appelation);
 
-    bottleElement.setAttribute("emlpacement", _emlpacement);
+    bottleElement.setAttribute("x", _emlpacement.x());
+
+    bottleElement.setAttribute("y", _emlpacement.y());
+
+    bottleElement.setAttribute("mousseux", _mousseux);
 
     return bottleElement;
 }
@@ -82,7 +90,11 @@ Bottle Bottle::fromDomElement(const QDomElement &bottleElement)
 
     _appelation = bottleElement.attribute("appelation");
 
-    _emlpacement = bottleElement.attribute("emlpacement");
+    _emlpacement.setX(bottleElement.attribute("x").toInt());
+
+    _emlpacement.setY(bottleElement.attribute("y").toInt());
+
+    _mousseux = bottleElement.attribute("mousseux").toInt();
 
     return *this;
 }
