@@ -3,19 +3,42 @@
 
 #include <QGraphicsView>
 #include <QWheelEvent>
+#include <QMouseEvent>
+#include <QDomElement>
+#include "Rack.h"
+#include "BottleList.h"
 
 class GraphicsView : public QGraphicsView
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    explicit GraphicsView(QWidget *parent = 0);
+  explicit GraphicsView(QWidget *parent = 0);
+  inline void setBottleList(const BottleList& bottleList){_bottleList=bottleList;_rack.draw(scene(), _bottleList);}
+  inline void setRack(const Rack rack){_rack=rack;_rack.draw(scene(), _bottleList);}
+
+  inline const BottleList& bottleList()const{return _bottleList;}
+  inline const Rack& rack()const{return _rack;}
+
+  inline BottleList& bottleList(){return _bottleList;}
+  inline Rack& rack(){return _rack;}
+
+public slots :
+  void showCustomContextMenu(QPoint pos);
 
 protected:
-    void wheelEvent(QWheelEvent *event);
-
-signals:
+  void wheelEvent(QWheelEvent *event);
+  void mouseDoubleClickEvent(QMouseEvent *event);
+  void editBottle(QPoint emplacement);
+  void rmBottle(Bottle* bottle);
+  void pasteBottle(QPoint emplacement);
 
 public slots:
+
+
+private :
+  BottleList _bottleList;
+  Rack _rack;
+  Bottle _copy;
 };
 
 #endif // GRAPHICSVIEW_H

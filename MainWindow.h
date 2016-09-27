@@ -5,10 +5,14 @@
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
-    Q_OBJECT
+  Q_OBJECT
 
-  public:
-    explicit MainWindow(QWidget *parent = 0);
+signals:
+  void editRack();
+
+public:
+  explicit MainWindow(QWidget *parent = 0);
+
 };
 
 #endif // MAINWINDOW_H

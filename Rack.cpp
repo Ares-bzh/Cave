@@ -1,4 +1,5 @@
 #include "Rack.h"
+#include "PosGraphicsEllipseItem.h"
 
 Rack::Rack()
 {
@@ -53,7 +54,7 @@ void Rack::draw(QGraphicsScene* scene, BottleList& bottleList)
 {
   int higth, width;
 
-
+  scene->clear();
   higth = ((Straight == _type)?40:30) * _row;
   width = 40 * _col;
 
@@ -68,18 +69,20 @@ void Rack::draw(QGraphicsScene* scene, BottleList& bottleList)
       for(int c=0; c<_col; c++)
       {
         Bottle* currentBottle = bottleList.fromPos(QPoint(c,r));
-        QBrush brush;
+        QBrush brush(Qt::SolidPattern);
         if(NULL != currentBottle)
+        {
           brush.setColor(currentBottle->color());
+          brush.setStyle(currentBottle->mousseux()?Qt::Dense2Pattern:Qt::SolidPattern);
+        }
         else
           brush.setColor(QColor(255, 255, 255));
 
-        scene->addEllipse(25 + c*40,
-                          25 + r*40,
-                          30,
-                          30,
-                          QPen(QColor(0, 0, 0)),
-                          brush);
+        PosGraphicsEllipseItem* item = new PosGraphicsEllipseItem(QPoint(c,r));
+        item->setPen(QPen(QColor(0, 0, 0)));
+        item->setBrush(brush);
+        item->setRect(25 + c*40, 25 + r*40, 30, 30);
+        scene->addItem(item);
       }
     }
   }
@@ -92,28 +95,19 @@ void Rack::draw(QGraphicsScene* scene, BottleList& bottleList)
         Bottle* currentBottle = bottleList.fromPos(QPoint(c,r));
         QBrush brush(Qt::SolidPattern);
         if(NULL != currentBottle)
+        {
           brush.setColor(currentBottle->color());
+          brush.setStyle(currentBottle->mousseux()?Qt::Dense3Pattern:Qt::SolidPattern);
+        }
         else
           brush.setColor(QColor(255, 255, 255));
 
-        if(0 ==r%2)
-        {
-          scene->addEllipse(25 + c*40,
-                            25 + r*28,
-                            30,
-                            30,
-                            QPen(QColor(0, 0, 0)),
-                            brush);
-        }
-        else
-        {
-          scene->addEllipse(25 + c*40 + 20,
-                            25 + r*28,
-                            30,
-                            30,
-                            QPen(QColor(0, 0, 0)),
-                            brush);
-        }
+        PosGraphicsEllipseItem* item = new PosGraphicsEllipseItem(QPoint(c,r));
+        item->setPen(QPen(QColor(0, 0, 0)));
+        item->setBrush(brush);
+        item->setRect((r%2)?(25 + c*40 + 20):(25 + c*40), 25 + r*28, 30, 30);
+        scene->addItem(item);
+
       }
     }
   }

@@ -17,12 +17,20 @@ SOURCES += main.cpp\
     Rack.cpp \
     Bottle.cpp \
     BottleList.cpp \
-    GraphicsView.cpp
+    GraphicsView.cpp \
+    PosGraphicsEllipseItem.cpp \
+    DialogBottle.cpp \
+    DialogRack.cpp
 
 HEADERS  += MainWindow.h \
     Rack.h \
     Bottle.h \
     BottleList.h \
-    GraphicsView.h
+    GraphicsView.h \
+    PosGraphicsEllipseItem.h \
+    DialogBottle.h \
+    DialogRack.h
 
-FORMS    += MainWindow.ui
+FORMS    += MainWindow.ui \
+    DialogBottle.ui \
+    DialogRack.ui
