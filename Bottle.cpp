@@ -1,4 +1,5 @@
 #include "Bottle.h"
+#include <QDate>
 
 const QStringList Bottle::cstColorName = QStringList()<<"Blanc" << "Rouge" << "Rosé";
 const QList<QColor> Bottle::cstColorList = QList<QColor>() << QColor(244, 242, 155) << QColor(160, 20, 20) << QColor(255, 160, 160);
@@ -128,4 +129,18 @@ Bottle Bottle::fromDomElement(const QDomElement &bottleElement)
     _mousseux = bottleElement.attribute("mousseux").toInt();
 
     return *this;
+}
+
+
+QColor Bottle::colorConso()const
+{
+  int currentYear = QDate::currentDate().year();
+  if(_dateConso> currentYear)
+    return QColor(255,255,255);
+  else if(_dateLimite> currentYear)
+    return QColor(0,255,0);
+  else if(_dateLimite==currentYear)
+    return QColor(255,255,0);
+  else
+    return QColor(255,0,0);
 }

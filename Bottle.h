@@ -65,6 +65,7 @@ public:
   inline QPoint& emlpacement(){return _emlpacement;}
 
   inline QColor color()const{return cstColorList[_couleur];}
+  QColor colorConso()const;
 
   QDomElement  toDomElement(QDomDocument& document) const;
   Bottle fromDomElement(const QDomElement &elementRequirement);

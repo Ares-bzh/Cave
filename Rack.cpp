@@ -53,6 +53,7 @@ Rack Rack::fromDomElement(const QDomElement &rackElement)
 void Rack::draw(QGraphicsScene* scene, BottleList& bottleList)
 {
   int higth, width;
+  QPen pen(QColor(0, 0, 0));
 
   scene->clear();
   higth = ((Straight == _type)?40:30) * _row;
@@ -79,10 +80,17 @@ void Rack::draw(QGraphicsScene* scene, BottleList& bottleList)
           brush.setColor(QColor(255, 255, 255));
 
         PosGraphicsEllipseItem* item = new PosGraphicsEllipseItem(QPoint(c,r));
-        item->setPen(QPen(QColor(0, 0, 0)));
+        item->setPen(pen);
         item->setBrush(brush);
         item->setRect(25 + c*40, 25 + r*40, 30, 30);
         scene->addItem(item);
+
+        if(NULL != currentBottle)
+        {
+          brush.setStyle(Qt::SolidPattern);
+          brush.setColor(currentBottle->colorConso());
+          scene->addRect(30 + c*40, 30 + r*40, 5, 5, pen, brush);
+        }
       }
     }
   }
@@ -103,10 +111,17 @@ void Rack::draw(QGraphicsScene* scene, BottleList& bottleList)
           brush.setColor(QColor(255, 255, 255));
 
         PosGraphicsEllipseItem* item = new PosGraphicsEllipseItem(QPoint(c,r));
-        item->setPen(QPen(QColor(0, 0, 0)));
+        item->setPen(pen);
         item->setBrush(brush);
         item->setRect((r%2)?(25 + c*40 + 20):(25 + c*40), 25 + r*28, 30, 30);
         scene->addItem(item);
+
+        if(NULL != currentBottle)
+        {
+          brush.setStyle(Qt::SolidPattern);
+          brush.setColor(currentBottle->colorConso());
+          scene->addRect((r%2)?(30 + c*40 + 20):(30 + c*40), 30 + r*28, 5, 5, pen, brush);
+        }
 
       }
     }
