@@ -7,11 +7,16 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 {
   Q_OBJECT
 
-signals:
+public slots:
   void editRack();
+  void open();
+  void save();
 
 public:
   explicit MainWindow(QWidget *parent = 0);
+
+private:
+  QFile _file;
 
 };
 

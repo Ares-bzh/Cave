@@ -13,14 +13,16 @@ class GraphicsView : public QGraphicsView
   Q_OBJECT
 public:
   explicit GraphicsView(QWidget *parent = 0);
-  inline void setBottleList(const BottleList& bottleList){_bottleList=bottleList;_rack.draw(scene(), _bottleList);}
-  inline void setRack(const Rack rack){_rack=rack;_rack.draw(scene(), _bottleList);}
+  inline void setBottleList(const BottleList& bottleList){_bottleList=bottleList;}
+  inline void setRack(const Rack rack){_rack=rack;}
 
   inline const BottleList& bottleList()const{return _bottleList;}
   inline const Rack& rack()const{return _rack;}
 
   inline BottleList& bottleList(){return _bottleList;}
   inline Rack& rack(){return _rack;}
+
+  inline void draw(){_rack.draw(scene(), _bottleList);}
 
 public slots :
   void showCustomContextMenu(QPoint pos);

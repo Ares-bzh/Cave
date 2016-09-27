@@ -12,10 +12,6 @@ GraphicsView::GraphicsView(QWidget *parent) : QGraphicsView(parent)
   setScene(new QGraphicsScene());
   _copy.setAnnee(0);
 
-  _rack.setCol(4);
-  _rack.setRow(4);
-  _rack.setType(Rack::Quincunx);
-
   _rack.draw(scene(), _bottleList);
 
   connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showCustomContextMenu(QPoint)));
