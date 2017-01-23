@@ -10,7 +10,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
   setupUi(this);
 
-  topMenuBar->addAction(actionModifierCasier);
+  toolButtonOpen->setDefaultAction(actionOpen);
+  toolButtonSave->setDefaultAction(actionSave);
+  toolButtonRack->setDefaultAction(actionModifierCasier);
 
 
   connect(actionModifierCasier, SIGNAL(triggered(bool)), this, SLOT(editRack()));
@@ -81,3 +83,30 @@ void MainWindow::save()
     _file.close();
   }
 }
+
+/*
+Widget::Widget(QWidget *parent) :
+  QWidget(parent)
+{
+  setupUi(this);
+
+  QQuickView* view = new QQuickView(QUrl("qrc:/Rack.qml"));
+  _qmlObject = view->rootObject();
+  layout()->addWidget(QWidget::createWindowContainer(view));
+
+  connect(pushButton, SIGNAL(clicked(bool)), this, SLOT(addBottle()));
+
+  connect(_qmlObject, SIGNAL(bottleClicked(int, int)), this, SLOT(bottleClicked(int, int)));
+}
+
+
+void Widget::addBottle()
+{
+  QMetaObject::invokeMethod(_qmlObject, "addBottle", Q_ARG(QVariant, 15), Q_ARG(QVariant, 20), Q_ARG(QVariant, "blue"), Q_ARG(QVariant, 4), Q_ARG(QVariant, 8));
+}
+
+void Widget::bottleClicked(int row, int col)
+{
+  qDebug() << row << col;
+}
+*/

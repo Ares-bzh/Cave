@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Rack.qml</file>
+        <file>Bottle.qml</file>
+    </qresource>
+</RCC>

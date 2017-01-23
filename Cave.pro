@@ -34,3 +34,6 @@ HEADERS  += MainWindow.h \
 FORMS    += MainWindow.ui \
     DialogBottle.ui \
     DialogRack.ui
+
+RESOURCES += \
+    Qml.qrc
